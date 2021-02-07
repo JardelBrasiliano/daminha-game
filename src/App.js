@@ -1,8 +1,10 @@
 import React from 'react';
+import Routes from './routes';
+
 import './reset.css';
 
 function App() {
-  return <h1>TESTE</h1>;
+  return <Routes />;
 }
 
 export default App;
