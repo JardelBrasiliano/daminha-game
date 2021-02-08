@@ -11,7 +11,7 @@ function SalaDeJogo() {
     <>
       <Header />
       <div className="salaDeJogo-container">
-        <JogoDeDama />;
+        <JogoDeDama />
       </div>
       <Footer />
     </>

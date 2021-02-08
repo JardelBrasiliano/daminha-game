@@ -1,0 +1,31 @@
+.tabuleiro-container {
+  position: relative;
+
+  width: 500px;
+  height: 500px;
+
+  background: url('../../../../assets/tabuleiro.png') no-repeat;
+  background-size: cover;
+}
+
+.coordinates {
+  left: 0;
+  position: absolute;
+  top: 0;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.coordinate-light {
+  fill: #779952;
+}
+
+.coordinate-dark,
+.coordinate-light {
+  font-weight: 600;
+}
+
+.coordinate-dark {
+  fill: #edeed1;
+}
