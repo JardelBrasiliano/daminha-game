@@ -17,13 +17,13 @@ function proximaCoord(posicaoAtual, listaMovimentosBrancas) {
   const coordXDireitaIndex = ordem.indexOf(posicaoAtual[0]) + 1;
   const coordXEsquerdaIndex = ordem.indexOf(posicaoAtual[0]) - 1;
 
-  const coordXDireita = coordXDireitaIndex > 9 ? 0 : coordXDireitaIndex;
+  const coordXDireita = coordXDireitaIndex >= 9 ? 0 : coordXDireitaIndex;
   const coordXEsquerda = coordXEsquerdaIndex < 1 ? 0 : coordXEsquerdaIndex;
 
   const coordYFrenteIndex = +posicaoAtual[1] + 1;
   const coordYVoltandoIndex = +posicaoAtual[1] - 1;
 
-  const coordYFrente = coordYFrenteIndex > 9 ? 0 : coordYFrenteIndex;
+  const coordYFrente = coordYFrenteIndex >= 9 ? 0 : coordYFrenteIndex;
   const coordYVoltando = coordYVoltandoIndex < 1 ? 0 : coordYVoltandoIndex;
 
   const movimentoFrenteEsquerdo = posicaoValdia(
@@ -34,7 +34,6 @@ function proximaCoord(posicaoAtual, listaMovimentosBrancas) {
     ordem[coordXEsquerda] + coordYVoltando,
     listaMovimentosBrancas,
   );
-
   const movimentoFrenteDireita = posicaoValdia(
     ordem[coordXDireita] + coordYFrente,
     listaMovimentosBrancas,

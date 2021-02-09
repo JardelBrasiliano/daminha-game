@@ -4,14 +4,17 @@ import PropTypes from 'prop-types';
 import MovDamasBrancasProvider from './MovDamasBrancas';
 import MovDamasPretasProvider from './MovDamasPretas';
 import ProximosMovimentosProvider from './ProximoMovimentos';
+import DamaClicadoProvider from './DamaClicado';
 
 function ContextProvider({ children }) {
   return (
-    <ProximosMovimentosProvider>
-      <MovDamasPretasProvider>
-        <MovDamasBrancasProvider>{children}</MovDamasBrancasProvider>
-      </MovDamasPretasProvider>
-    </ProximosMovimentosProvider>
+    <DamaClicadoProvider>
+      <ProximosMovimentosProvider>
+        <MovDamasPretasProvider>
+          <MovDamasBrancasProvider>{children}</MovDamasBrancasProvider>
+        </MovDamasPretasProvider>
+      </ProximosMovimentosProvider>
+    </DamaClicadoProvider>
   );
 }
 
