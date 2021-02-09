@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const MovDamasBrancasContext = createContext();
 
 export default function MovDamasBrancasProvider({ children }) {
-  const [movimentos, setMovimentos] = useState([
+  const [movimentosBrancas, setMovimentosBrancas] = useState([
     'A1',
     'C1',
     'E1',
@@ -22,8 +22,8 @@ export default function MovDamasBrancasProvider({ children }) {
   return (
     <MovDamasBrancasContext.Provider
       value={{
-        movimentos,
-        setMovimentos,
+        movimentosBrancas,
+        setMovimentosBrancas,
       }}
     >
       {children}
@@ -34,8 +34,8 @@ export default function MovDamasBrancasProvider({ children }) {
 export function useMovDamasBrancas() {
   const context = useContext(MovDamasBrancasContext);
   if (!context) throw new Error('useCount must be used within a CountProvider');
-  const { movimentos, setMovimentos } = context;
-  return { movimentos, setMovimentos };
+  const { movimentosBrancas, setMovimentosBrancas } = context;
+  return { movimentosBrancas, setMovimentosBrancas };
 }
 
 MovDamasBrancasProvider.propTypes = {

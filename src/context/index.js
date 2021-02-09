@@ -3,12 +3,15 @@ import PropTypes from 'prop-types';
 
 import MovDamasBrancasProvider from './MovDamasBrancas';
 import MovDamasPretasProvider from './MovDamasPretas';
+import ProximosMovimentosProvider from './ProximoMovimentos';
 
 function ContextProvider({ children }) {
   return (
-    <MovDamasPretasProvider>
-      <MovDamasBrancasProvider>{children}</MovDamasBrancasProvider>
-    </MovDamasPretasProvider>
+    <ProximosMovimentosProvider>
+      <MovDamasPretasProvider>
+        <MovDamasBrancasProvider>{children}</MovDamasBrancasProvider>
+      </MovDamasPretasProvider>
+    </ProximosMovimentosProvider>
   );
 }
 

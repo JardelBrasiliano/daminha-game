@@ -5,7 +5,7 @@ import { convertendoCoordenadas } from '../../posicoesDoTabuleiro';
 
 import './styles.css';
 
-function DamaBranca({ posicao }) {
+function ProximosMovimentos({ posicao }) {
   const [damaLeft, setDamaLeft] = useState('');
   const [damaBottom, setDamaBottom] = useState('');
 
@@ -15,20 +15,21 @@ function DamaBranca({ posicao }) {
     );
     setDamaLeft(novaCoordDamaLeft);
     setDamaBottom(novaCoordDamaBottom);
-  }, []);
+  }, [posicao]);
 
   return (
-    <div
-      className="dama-container"
+    <bottom
+      id={posicao}
+      className="proximosMovimentos-container"
       style={{ left: `${damaLeft}`, bottom: `${damaBottom}` }}
     >
-      DAMA
-    </div>
+      PROX
+    </bottom>
   );
 }
 
-DamaBranca.propTypes = {
+ProximosMovimentos.propTypes = {
   posicao: PropTypes.string.isRequired,
 };
 
-export default DamaBranca;
+export default ProximosMovimentos;
