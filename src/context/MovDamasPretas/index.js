@@ -5,18 +5,18 @@ const MovDamasPretasContext = createContext();
 
 export default function MovDamasPretasProvider({ children }) {
   const [movimentosPretas, setMovimentosPretas] = useState([
-    'B8',
-    'D8',
-    'F8',
-    'H8',
-    'A7',
-    'C7',
-    'E7',
-    'G7',
-    'B6',
-    'D6',
-    'F6',
-    'H6',
+    'PB8',
+    'PD8',
+    'PF8',
+    'PH8',
+    'PA7',
+    'PC7',
+    'PE7',
+    'PG7',
+    'PB6',
+    'PD6',
+    'PF6',
+    'PH6',
   ]);
 
   return (

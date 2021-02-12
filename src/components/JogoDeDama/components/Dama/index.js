@@ -1,31 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
-import { convertendoCoordenadas } from '../../posicoesDoTabuleiro';
-
 import { useMovDamasBrancas } from '../../../../context/MovDamasBrancas';
+import { useMovDamasPretas } from '../../../../context/MovDamasPretas';
 import { useProximosMovimentos } from '../../../../context/ProximoMovimentos';
 import { useDamaClicado } from '../../../../context/DamaClicado';
 
-import proximaCoord from './dama';
+import ClasseDama from '../../classes/dama';
 
 import './styles.css';
 
 function DamaBranca({ posicao }) {
-  const [damaLeft, setDamaLeft] = useState('');
-  const [damaBottom, setDamaBottom] = useState('');
+  const newDama = new ClasseDama();
+  newDama.posicao = posicao;
+
   const { movimentosBrancas } = useMovDamasBrancas();
+  const { movimentosPretas } = useMovDamasPretas();
   const { setProximosMovimentos } = useProximosMovimentos();
   const { damaClicado, setDamaClicado } = useDamaClicado();
-
-  useEffect(() => {
-    const { novaCoordDamaLeft, novaCoordDamaBottom } = convertendoCoordenadas(
-      posicao,
-    );
-    setDamaLeft(novaCoordDamaLeft);
-    setDamaBottom(novaCoordDamaBottom);
-  }, [movimentosBrancas]);
-
+  console.log(movimentosPretas);
   function calcularJogada(dama) {
     const damaIdAtual = damaClicado.nome ? damaClicado.nome.id : '';
     // eslint-disable-next-line
@@ -41,12 +34,12 @@ function DamaBranca({ posicao }) {
       // eslint-disable-next-line
       dama.style.backgroundColor = '';
     } else {
-      const {
+      const [
         movimentoFrenteDireita,
         movimentoFrenteEsquerdo,
         movimentoVoltandoDireita,
         movimentoVoltandoEsquerdo,
-      } = proximaCoord(posicao, movimentosBrancas);
+      ] = newDama.proximaCoord(movimentosBrancas);
 
       setProximosMovimentos([
         movimentoFrenteDireita,
@@ -70,8 +63,8 @@ function DamaBranca({ posicao }) {
       id={posicao}
       className="dama-container"
       style={{
-        left: `${damaLeft}`,
-        bottom: `${damaBottom}`,
+        left: `${newDama.posicaoColuna}`,
+        bottom: `${newDama.posicaoLinha}`,
       }}
     >
       DAMA

@@ -1,29 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-
-import { convertendoCoordenadas } from '../../posicoesDoTabuleiro';
 
 import { useProximosMovimentos } from '../../../../context/ProximoMovimentos';
 import { useMovDamasBrancas } from '../../../../context/MovDamasBrancas';
 import { useDamaClicado } from '../../../../context/DamaClicado';
 
+import ClasseDama from '../../classes/dama';
+
 import './styles.css';
 
 function ProximosMovimentos({ posicao }) {
-  const [damaLeft, setDamaLeft] = useState('');
-  const [damaBottom, setDamaBottom] = useState('');
+  const newDama = new ClasseDama();
+  newDama.posicao = posicao;
 
   const { damaClicado, setDamaClicado } = useDamaClicado();
   const { movimentosBrancas, setMovimentosBrancas } = useMovDamasBrancas();
   const { setProximosMovimentos } = useProximosMovimentos();
-
-  useEffect(() => {
-    const { novaCoordDamaLeft, novaCoordDamaBottom } = convertendoCoordenadas(
-      posicao,
-    );
-    setDamaLeft(novaCoordDamaLeft);
-    setDamaBottom(novaCoordDamaBottom);
-  }, [posicao]);
 
   function movimentandoDama(posicaoProxima) {
     const idDamaClicado = damaClicado.nome.id;
@@ -47,7 +39,10 @@ function ProximosMovimentos({ posicao }) {
       id={posicao}
       onClick={(pos) => movimentandoDama(pos.target.id)}
       className="proximosMovimentos-container"
-      style={{ left: `${damaLeft}`, bottom: `${damaBottom}` }}
+      style={{
+        left: `${newDama.posicaoColuna}`,
+        bottom: `${newDama.posicaoLinha}`,
+      }}
     >
       PROX
     </bottom>

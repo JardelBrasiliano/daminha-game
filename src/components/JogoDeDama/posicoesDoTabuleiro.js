@@ -21,8 +21,8 @@ const posicaoBottom = [
 ];
 
 function convertendoCoordenadas(coord) {
-  const coordLeft = coord[0].toLowerCase();
-  const coordBottom = coord[1];
+  const coordLeft = coord[1].toLowerCase();
+  const coordBottom = coord[2];
 
   const novaCoordDamaLeft = posicaoLeft[coordLeft];
   const novaCoordDamaBottom = posicaoBottom[+coordBottom - 1];
