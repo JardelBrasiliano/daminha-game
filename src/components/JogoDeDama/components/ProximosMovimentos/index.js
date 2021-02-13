@@ -22,11 +22,13 @@ function ProximosMovimentos({ posicao, comerEssa }) {
   const { setProximosMovimentos } = useProximosMovimentos();
 
   function excluindoDamaDaLista(list) {
+    const novaLista = list.map((itemList) => itemList[0]);
+
     const cor = comerEssa[0];
 
     switch (cor) {
       case 'P': {
-        const indexDama = list.indexOf(comerEssa);
+        const indexDama = novaLista.indexOf(comerEssa);
 
         list.splice(indexDama, 1);
 
@@ -34,7 +36,7 @@ function ProximosMovimentos({ posicao, comerEssa }) {
         break;
       }
       case 'B': {
-        const indexDama = list.indexOf(comerEssa);
+        const indexDama = novaLista.indexOf(comerEssa);
 
         list.splice(indexDama, 1);
 
@@ -53,8 +55,8 @@ function ProximosMovimentos({ posicao, comerEssa }) {
     setProximosMovimentos([-1, -1, -1, -1]);
     if (corClicado === 'B') {
       const novaListaDeMovimento = movimentosBrancas.map((movimento) => {
-        if (idDamaClicado === movimento) {
-          return posicaoProxima;
+        if (idDamaClicado === movimento[0]) {
+          return [posicaoProxima, movimento[1]];
         }
         return movimento;
       });
@@ -62,8 +64,8 @@ function ProximosMovimentos({ posicao, comerEssa }) {
       excluindoDamaDaLista(movimentosPretas);
     } else if (corClicado === 'P') {
       const novaListaDeMovimento = movimentosPretas.map((movimento) => {
-        if (idDamaClicado === movimento) {
-          return posicaoProxima;
+        if (idDamaClicado === movimento[0]) {
+          return [posicaoProxima, movimento[1]];
         }
         return movimento;
       });

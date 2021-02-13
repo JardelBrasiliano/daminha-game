@@ -45,11 +45,11 @@ function JogoDeDama() {
   return (
     <Tabuleiro>
       {movimentosBrancas.map((posicao, index) => (
-        <Dama key={`key-damas-brancas-${index}`} posicao={posicao} />
+        <Dama key={`key-damas-brancas-${index}`} posicao={posicao[0]} />
       ))}
 
       {movimentosPretas.map((posicao, index) => (
-        <Dama key={`key-damas-pretas-${index}`} posicao={posicao} />
+        <Dama key={`key-damas-pretas-${index}`} posicao={posicao[0]} />
       ))}
 
       {proximoMov.map(RenderProximosMovimentos)}

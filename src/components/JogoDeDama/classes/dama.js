@@ -47,6 +47,9 @@ class ClasseDama {
   }
 
   posicaoValida = (posicao, listaMovimentosBrancas, listaMovimentosPretas) => {
+    const novaListaDasBrancas = listaMovimentosBrancas.map((item) => item[0]);
+    const novaListaDasPretas = listaMovimentosPretas.map((item) => item[0]);
+
     if (!posicao[0] || !posicao[1]) {
       return -1;
     }
@@ -54,9 +57,9 @@ class ClasseDama {
       return -1;
     }
     const damaBranca =
-      listaMovimentosBrancas[listaMovimentosBrancas.indexOf(`B${posicao}`)];
+      novaListaDasBrancas[novaListaDasBrancas.indexOf(`B${posicao}`)];
     const damaPreta =
-      listaMovimentosPretas[listaMovimentosPretas.indexOf(`P${posicao}`)];
+      novaListaDasPretas[novaListaDasPretas.indexOf(`P${posicao}`)];
 
     if (this.cor === 'B' && damaBranca) {
       return -1;
@@ -74,6 +77,9 @@ class ClasseDama {
   };
 
   comerDama = (posicao, listaMovimentosBrancas, listaMovimentosPretas) => {
+    const novaListaDasBrancas = listaMovimentosBrancas.map((item) => item[0]);
+    const novaListaDasPretas = listaMovimentosPretas.map((item) => item[0]);
+
     if (!posicao[0] || !posicao[1]) {
       return -1;
     }
@@ -81,9 +87,9 @@ class ClasseDama {
       return -1;
     }
     const damaBranca =
-      listaMovimentosBrancas[listaMovimentosBrancas.indexOf(`B${posicao}`)];
+      novaListaDasBrancas[novaListaDasBrancas.indexOf(`B${posicao}`)];
     const damaPreta =
-      listaMovimentosPretas[listaMovimentosPretas.indexOf(`P${posicao}`)];
+      novaListaDasPretas[novaListaDasPretas.indexOf(`P${posicao}`)];
 
     if (damaBranca || damaPreta) {
       return -1;
@@ -112,6 +118,7 @@ class ClasseDama {
       listaMovimentosBrancas,
       listaMovimentosPretas,
     );
+
     this.novoMovimentoFrenteParaEsqueda =
       this.cor === 'B' ? [movimentoFrenteEsquerdo, -1] : [-1, -1];
     this.novoMovimentoFrenteParaDireita =
@@ -267,7 +274,7 @@ class ClasseDama {
       movimentoVoltandoEsquerdo,
       movimentoVoltandoDireita,
     ] = this.calcularMovimentoParaVoltando(
-      listaMovimentosBrancas,
+      listaMovimentosBrancas, // <<<
       listaMovimentosPretas,
     );
 
