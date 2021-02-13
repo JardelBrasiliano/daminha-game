@@ -14,7 +14,7 @@ function ProximosMovimentos({ posicao, comerEssa }) {
   const newDama = new ClasseDama();
   newDama.posicao = posicao;
 
-  const damaCor = newDama.cor === 'B' ? 'red' : 'black';
+  const damaCor = 'transparent';
 
   const { damaClicado, setDamaClicado } = useDamaClicado();
   const { movimentosBrancas, setMovimentosBrancas } = useMovDamasBrancas();

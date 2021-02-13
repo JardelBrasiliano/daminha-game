@@ -6,6 +6,9 @@ import { useMovDamasPretas } from '../../../../context/MovDamasPretas';
 import { useProximosMovimentos } from '../../../../context/ProximoMovimentos';
 import { useDamaClicado } from '../../../../context/DamaClicado';
 
+import damaBranca from '../../../../assets/damaBranca.png';
+import damaPreta from '../../../../assets/damaPreta.png';
+
 import ClasseDama from '../../classes/dama';
 
 import './styles.css';
@@ -14,7 +17,7 @@ function DamaBranca({ posicao }) {
   const newDama = new ClasseDama();
   newDama.posicao = posicao;
 
-  const damaCor = newDama.cor === 'B' ? 'red' : 'black';
+  const damaCor = newDama.cor === 'B' ? damaBranca : damaPreta;
 
   const { movimentosBrancas } = useMovDamasBrancas();
   const { movimentosPretas } = useMovDamasPretas();
@@ -34,7 +37,7 @@ function DamaBranca({ posicao }) {
         clicado: false,
       });
       // eslint-disable-next-line
-      dama.style.backgroundColor = dama.id[0] === 'B' ? 'red' : 'black';
+      dama.style.backgroundColor = 'transparent';
     } else {
       const [
         movimentoFrenteDireita,
@@ -54,8 +57,7 @@ function DamaBranca({ posicao }) {
         clicado: true,
       });
       if (damaClicado.nome) {
-        damaClicado.nome.style.backgroundColor =
-          damaClicado.nome.id[0] === 'B' ? 'red' : 'black';
+        damaClicado.nome.style.backgroundColor = 'transparent';
       }
     }
   }
@@ -66,7 +68,7 @@ function DamaBranca({ posicao }) {
       id={posicao}
       className="dama-container"
       style={{
-        backgroundColor: `${damaCor}`,
+        backgroundImage: `url(${damaCor})`,
         left: `${newDama.posicaoColuna}`,
         bottom: `${newDama.posicaoLinha}`,
       }}
