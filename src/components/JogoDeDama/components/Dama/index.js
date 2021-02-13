@@ -14,15 +14,17 @@ function DamaBranca({ posicao }) {
   const newDama = new ClasseDama();
   newDama.posicao = posicao;
 
+  const damaCor = newDama.cor === 'B' ? 'red' : 'black';
+
   const { movimentosBrancas } = useMovDamasBrancas();
   const { movimentosPretas } = useMovDamasPretas();
   const { setProximosMovimentos } = useProximosMovimentos();
   const { damaClicado, setDamaClicado } = useDamaClicado();
-  console.log(movimentosPretas);
+
   function calcularJogada(dama) {
     const damaIdAtual = damaClicado.nome ? damaClicado.nome.id : '';
     // eslint-disable-next-line
-    dama.style.backgroundColor = 'yellow';
+    dama.style.backgroundColor = 'blue';
 
     if (damaClicado.clicado && damaIdAtual === dama.id) {
       setProximosMovimentos([-1, -1, -1, -1]);
@@ -32,14 +34,14 @@ function DamaBranca({ posicao }) {
         clicado: false,
       });
       // eslint-disable-next-line
-      dama.style.backgroundColor = '';
+      dama.style.backgroundColor = dama.id[0] === 'B' ? 'red' : 'black';
     } else {
       const [
         movimentoFrenteDireita,
         movimentoFrenteEsquerdo,
         movimentoVoltandoDireita,
         movimentoVoltandoEsquerdo,
-      ] = newDama.proximaCoord(movimentosBrancas);
+      ] = newDama.proximaCoord(movimentosBrancas, movimentosPretas);
 
       setProximosMovimentos([
         movimentoFrenteDireita,
@@ -52,7 +54,8 @@ function DamaBranca({ posicao }) {
         clicado: true,
       });
       if (damaClicado.nome) {
-        damaClicado.nome.style.backgroundColor = '';
+        damaClicado.nome.style.backgroundColor =
+          damaClicado.nome.id[0] === 'B' ? 'red' : 'black';
       }
     }
   }
@@ -63,12 +66,11 @@ function DamaBranca({ posicao }) {
       id={posicao}
       className="dama-container"
       style={{
+        backgroundColor: `${damaCor}`,
         left: `${newDama.posicaoColuna}`,
         bottom: `${newDama.posicaoLinha}`,
       }}
-    >
-      DAMA
-    </bottom>
+    />
   );
 }
 

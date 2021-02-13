@@ -5,10 +5,10 @@ const ProximosMovimentosContext = createContext();
 
 export default function ProximosMovimentosProvider({ children }) {
   const [proximosMovimentos, setProximosMovimentos] = useState([
-    -1,
-    -1,
-    -1,
-    -1,
+    [-1, -1],
+    [-1, -1],
+    [-1, -1],
+    [-1, -1],
   ]);
 
   return (

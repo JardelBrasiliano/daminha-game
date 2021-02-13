@@ -29,6 +29,19 @@ function JogoDeDama() {
     setProximoMov(novaListaDeProximos);
   }, [proximosMovimentos]);
 
+  function RenderProximosMovimentos(posicao, index) {
+    if (posicao[0] === -1 || posicao[0] === 0) {
+      return '';
+    }
+    return (
+      <ProximosMovimentos
+        key={`key-proximos-movimentos-${index}`}
+        posicao={posicao[0]}
+        comerEssa={posicao[1]}
+      />
+    );
+  }
+
   return (
     <Tabuleiro>
       {movimentosBrancas.map((posicao, index) => (
@@ -39,12 +52,7 @@ function JogoDeDama() {
         <Dama key={`key-damas-pretas-${index}`} posicao={posicao} />
       ))}
 
-      {proximoMov.map((posicao, index) => (
-        <ProximosMovimentos
-          key={`key-proximos-movimentos-${index}`}
-          posicao={posicao}
-        />
-      ))}
+      {proximoMov.map(RenderProximosMovimentos)}
     </Tabuleiro>
   );
 }
