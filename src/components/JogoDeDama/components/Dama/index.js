@@ -10,11 +10,12 @@ import damaBranca from '../../../../assets/damaBranca.png';
 import damaPreta from '../../../../assets/damaPreta.png';
 
 import ClasseDama from '../../classes/dama';
+import SuperDama from '../../classes/superDama';
 
 import './styles.css';
 
-function DamaBranca({ posicao }) {
-  const newDama = new ClasseDama();
+function DamaBranca({ posicao, superDama }) {
+  const newDama = superDama === -1 ? new ClasseDama() : new SuperDama();
   newDama.posicao = posicao;
 
   const damaCor = newDama.cor === 'B' ? damaBranca : damaPreta;
@@ -66,7 +67,7 @@ function DamaBranca({ posicao }) {
     <bottom
       onClick={(dama) => calcularJogada(dama.target)}
       id={posicao}
-      className="dama-container"
+      className={`dama-container ${superDama === -1 ? '' : 'superDama'}`}
       style={{
         backgroundImage: `url(${damaCor})`,
         left: `${newDama.posicaoColuna}`,
@@ -78,6 +79,7 @@ function DamaBranca({ posicao }) {
 
 DamaBranca.propTypes = {
   posicao: PropTypes.string.isRequired,
+  superDama: PropTypes.number.isRequired,
 };
 
 export default DamaBranca;

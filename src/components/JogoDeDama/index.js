@@ -9,6 +9,7 @@ import { useMovDamasPretas } from '../../context/MovDamasPretas';
 import { useProximosMovimentos } from '../../context/ProximoMovimentos';
 
 import './classes/dama';
+import './classes/superDama';
 
 import './styles.css';
 
@@ -20,6 +21,7 @@ function JogoDeDama() {
   const { proximosMovimentos } = useProximosMovimentos();
 
   useEffect(() => {
+    console.log('PROXIMOS MOVIMENTOS - > ', proximosMovimentos);
     const novaListaDeProximos = [];
     proximosMovimentos.forEach((element) => {
       if (element !== -1) {
@@ -45,11 +47,19 @@ function JogoDeDama() {
   return (
     <Tabuleiro>
       {movimentosBrancas.map((posicao, index) => (
-        <Dama key={`key-damas-brancas-${index}`} posicao={posicao[0]} />
+        <Dama
+          key={`key-damas-brancas-${index}`}
+          posicao={posicao[0]}
+          superDama={posicao[1]}
+        />
       ))}
 
       {movimentosPretas.map((posicao, index) => (
-        <Dama key={`key-damas-pretas-${index}`} posicao={posicao[0]} />
+        <Dama
+          key={`key-damas-pretas-${index}`}
+          posicao={posicao[0]}
+          superDama={posicao[1]}
+        />
       ))}
 
       {proximoMov.map(RenderProximosMovimentos)}

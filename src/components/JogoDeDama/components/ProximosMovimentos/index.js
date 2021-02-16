@@ -56,6 +56,9 @@ function ProximosMovimentos({ posicao, comerEssa }) {
     if (corClicado === 'B') {
       const novaListaDeMovimento = movimentosBrancas.map((movimento) => {
         if (idDamaClicado === movimento[0]) {
+          if (posicaoProxima[2] === '8') {
+            return [posicaoProxima, 1];
+          }
           return [posicaoProxima, movimento[1]];
         }
         return movimento;

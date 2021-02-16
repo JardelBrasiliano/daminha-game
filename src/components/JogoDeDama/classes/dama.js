@@ -1,6 +1,7 @@
 class ClasseDama {
-  constructor() {
+  constructor(superDama) {
     this.name = '';
+    this.superDama = superDama;
     this.cor = '';
     this.coluna = '';
     this.linha = '';
@@ -274,7 +275,7 @@ class ClasseDama {
       movimentoVoltandoEsquerdo,
       movimentoVoltandoDireita,
     ] = this.calcularMovimentoParaVoltando(
-      listaMovimentosBrancas, // <<<
+      listaMovimentosBrancas,
       listaMovimentosPretas,
     );
 

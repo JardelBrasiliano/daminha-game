@@ -5,7 +5,7 @@ const MovDamasBrancasContext = createContext();
 
 export default function MovDamasBrancasProvider({ children }) {
   const [movimentosBrancas, setMovimentosBrancas] = useState([
-    ['BA1', -1],
+    ['BA1', 1],
     ['BC1', -1],
     ['BE1', -1],
     ['BG1', -1],
