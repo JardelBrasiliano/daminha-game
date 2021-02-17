@@ -5,4 +5,18 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
+}
+.salaDejogo-btn-limpar {
+  font-size: 17px;
+  font-family: monospace;
+  font-family: Poiret One;
+
+  width: 121px;
+  border: none;
+  padding: 5px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  background: tomato;
 }

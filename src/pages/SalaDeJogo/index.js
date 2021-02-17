@@ -11,6 +11,13 @@ function SalaDeJogo() {
     <>
       <Header />
       <div className="salaDeJogo-container">
+        <button
+          className="salaDejogo-btn-limpar"
+          type="button"
+          onClick={() => window.location.reload()}
+        >
+          Limpar
+        </button>
         <JogoDeDama />
       </div>
       <Footer />

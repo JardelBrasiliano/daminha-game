@@ -68,6 +68,9 @@ function ProximosMovimentos({ posicao, comerEssa }) {
     } else if (corClicado === 'P') {
       const novaListaDeMovimento = movimentosPretas.map((movimento) => {
         if (idDamaClicado === movimento[0]) {
+          if (posicaoProxima[2] === '1') {
+            return [posicaoProxima, 1];
+          }
           return [posicaoProxima, movimento[1]];
         }
         return movimento;

@@ -14,7 +14,7 @@ export default function MovDamasPretasProvider({ children }) {
     ['PE7', -1],
     ['PG7', -1],
     ['PB6', -1],
-    ['PD6', 1],
+    ['PD6', -1],
     ['PF6', -1],
     ['PH6', -1],
   ]);
