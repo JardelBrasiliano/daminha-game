@@ -28,7 +28,7 @@ function DamaBranca({ posicao, superDama }) {
   function calcularJogada(dama) {
     const damaIdAtual = damaClicado.nome ? damaClicado.nome.id : '';
     // eslint-disable-next-line
-    dama.style.backgroundColor = 'blue';
+    dama.style.backgroundColor = '#296BFF';
 
     if (damaClicado.clicado && damaIdAtual === dama.id) {
       setProximosMovimentos([-1, -1, -1, -1]);
@@ -40,19 +40,27 @@ function DamaBranca({ posicao, superDama }) {
       // eslint-disable-next-line
       dama.style.backgroundColor = 'transparent';
     } else {
-      const [
-        movimentoFrenteDireita,
-        movimentoFrenteEsquerdo,
-        movimentoVoltandoDireita,
-        movimentoVoltandoEsquerdo,
-      ] = newDama.proximaCoord(movimentosBrancas, movimentosPretas);
+      if (superDama === -1) {
+        const [
+          movimentoFrenteDireita,
+          movimentoFrenteEsquerdo,
+          movimentoVoltandoDireita,
+          movimentoVoltandoEsquerdo,
+        ] = newDama.proximaCoord(movimentosBrancas, movimentosPretas);
 
-      setProximosMovimentos([
-        movimentoFrenteDireita,
-        movimentoFrenteEsquerdo,
-        movimentoVoltandoDireita,
-        movimentoVoltandoEsquerdo,
-      ]);
+        setProximosMovimentos([
+          movimentoFrenteDireita,
+          movimentoFrenteEsquerdo,
+          movimentoVoltandoDireita,
+          movimentoVoltandoEsquerdo,
+        ]);
+      } else {
+        const novaLista = newDama.proximaCoord(
+          movimentosBrancas,
+          movimentosPretas,
+        );
+        setProximosMovimentos(novaLista);
+      }
       setDamaClicado({
         nome: dama,
         clicado: true,

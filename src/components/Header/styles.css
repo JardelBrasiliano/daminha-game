@@ -39,18 +39,6 @@
   width: 250px;
   height: 100%;
 }
-
-.header-imagem-aranha {
-  position: absolute;
-  top: -200px;
-
-  width: 150px;
-  height: 200px;
-  background: url('../../assets/github.png') center no-repeat;
-  background-size: cover;
-
-  animation: animaAranha 5s ease-in-out;
-}
 .header-menu {
   display: flex;
   align-items: center;
@@ -68,25 +56,4 @@
   font-size: 20px;
 
   color: #000000;
-}
-
-@keyframes animaAranha {
-  0% {
-    top: -200px;
-  }
-  70% {
-    top: 0px;
-  }
-  100% {
-    top: -200px;
-  }
-}
-
-@keyframes animaNome {
-  0% {
-    top: -50px;
-  }
-  12% {
-    top: 0px;
-  }
 }

@@ -50,11 +50,13 @@ class ClasseDama {
   posicaoValida = (posicao, listaMovimentosBrancas, listaMovimentosPretas) => {
     const novaListaDasBrancas = listaMovimentosBrancas.map((item) => item[0]);
     const novaListaDasPretas = listaMovimentosPretas.map((item) => item[0]);
-
     if (!posicao[0] || !posicao[1]) {
       return -1;
     }
     if (posicao[0] === '0' || posicao[1] === '0') {
+      return -1;
+    }
+    if (posicao[1] === '9') {
       return -1;
     }
     const damaBranca =

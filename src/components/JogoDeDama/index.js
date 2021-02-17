@@ -21,7 +21,7 @@ function JogoDeDama() {
   const { proximosMovimentos } = useProximosMovimentos();
 
   useEffect(() => {
-    console.log('PROXIMOS MOVIMENTOS - > ', proximosMovimentos);
+    console.log(movimentosBrancas.length);
     const novaListaDeProximos = [];
     proximosMovimentos.forEach((element) => {
       if (element !== -1) {
