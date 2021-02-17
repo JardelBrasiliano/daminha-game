@@ -21,7 +21,6 @@ function JogoDeDama() {
   const { proximosMovimentos } = useProximosMovimentos();
 
   useEffect(() => {
-    console.log(movimentosBrancas.length);
     const novaListaDeProximos = [];
     proximosMovimentos.forEach((element) => {
       if (element !== -1) {
@@ -63,6 +62,14 @@ function JogoDeDama() {
       ))}
 
       {proximoMov.map(RenderProximosMovimentos)}
+
+      <button
+        className="salaDejogo-btn-limpar"
+        type="button"
+        onClick={() => window.location.reload()}
+      >
+        Limpar
+      </button>
     </Tabuleiro>
   );
 }

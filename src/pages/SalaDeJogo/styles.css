@@ -5,12 +5,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
 }
 .salaDejogo-btn-limpar {
   font-size: 17px;
   font-family: monospace;
   font-family: Poiret One;
+
+  position: absolute;
+  top: 0;
+  left: -150px;
 
   width: 121px;
   border: none;
