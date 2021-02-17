@@ -1,0 +1,12 @@
+.proximosMovimentos-container {
+  position: absolute;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 12.5%;
+  height: 12.5%;
+
+  background-color: #faea3faf;
+}
