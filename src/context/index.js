@@ -1,15 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import ProximosMovimentosProvider from './damas/ProximoMovimentosDasDamas';
+import DamasProvider from './damas';
 
-import MovimentosDasDamasProvider from './damas/MovimentosDasDamas';
+import SuperDamasProvider from './superDama';
 
 function ContextProvider({ children }) {
   return (
-    <MovimentosDasDamasProvider>
-      <ProximosMovimentosProvider>{children}</ProximosMovimentosProvider>
-    </MovimentosDasDamasProvider>
+    <DamasProvider>
+      <SuperDamasProvider>{children}</SuperDamasProvider>
+    </DamasProvider>
   );
 }
 
