@@ -1,23 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import MovDamasBrancasProvider from './MovDamasBrancas';
-import MovDamasPretasProvider from './MovDamasPretas';
-import ProximosMovimentosProvider from './ProximoMovimentos';
-import DamaClicadoProvider from './DamaClicado';
+import ProximosMovimentosProvider from './damas/ProximoMovimentosDasDamas';
 
-import MovimentosDasDamasProvider from './MovimentosDasDamas';
+import MovimentosDasDamasProvider from './damas/MovimentosDasDamas';
 
 function ContextProvider({ children }) {
   return (
     <MovimentosDasDamasProvider>
-      <DamaClicadoProvider>
-        <ProximosMovimentosProvider>
-          <MovDamasPretasProvider>
-            <MovDamasBrancasProvider>{children}</MovDamasBrancasProvider>
-          </MovDamasPretasProvider>
-        </ProximosMovimentosProvider>
-      </DamaClicadoProvider>
+      <ProximosMovimentosProvider>{children}</ProximosMovimentosProvider>
     </MovimentosDasDamasProvider>
   );
 }

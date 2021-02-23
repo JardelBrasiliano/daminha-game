@@ -1,12 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
-import { useProximosMovimentos } from '../../../../context/ProximoMovimentos';
-// import { useMovDamasBrancas } from '../../../../context/MovDamasBrancas';
-// import { useMovDamasPretas } from '../../../../context/MovDamasPretas';
-// import { useDamaClicado } from '../../../../context/DamaClicado';
-
-import { useMovimentosDasDamas } from '../../../../context/MovimentosDasDamas';
+import { useMovimentosDasDamas } from '../../../../../context/damas/MovimentosDasDamas';
+import { useProximosMovimentos } from '../../../../../context/damas/ProximoMovimentosDasDamas';
 
 import './styles.css';
 

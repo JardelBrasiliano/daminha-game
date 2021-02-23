@@ -10,8 +10,3 @@
   background-size: cover;
   background-repeat: no-repeat;
 }
-
-.superDama::before {
-  content: url('../../../../assets/coroa.svg');
-  transform: scale(0.05);
-}

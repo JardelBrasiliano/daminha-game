@@ -1,13 +1,11 @@
 import React from 'react';
 
-import Tabuleiro from './components/Tabuleiro';
-import Dama from './components/DamaTeste';
-import ProximosMovimentos from './components/ProximosMovimentos';
+import Tabuleiro from './Tabuleiro';
+import Dama from './Tabuleiro/Dama';
+import ProximosMovimentos from './Tabuleiro/Dama/ProximosMovimentos';
 
-import { useMovimentosDasDamas } from '../../context/MovimentosDasDamas';
-import { useProximosMovimentos } from '../../context/ProximoMovimentos';
-
-import './styles.css';
+import { useMovimentosDasDamas } from '../../context/damas/MovimentosDasDamas';
+import { useProximosMovimentos } from '../../context/damas/ProximoMovimentosDasDamas';
 
 function JogoDeDama() {
   const { MovimentosDasDamas } = useMovimentosDasDamas();

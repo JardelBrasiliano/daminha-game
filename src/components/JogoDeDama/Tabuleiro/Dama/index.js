@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
-import { useMovimentosDasDamas } from '../../../../context/MovimentosDasDamas';
-import { useProximosMovimentos } from '../../../../context/ProximoMovimentos';
+import { useMovimentosDasDamas } from '../../../../context/damas/MovimentosDasDamas';
+import { useProximosMovimentos } from '../../../../context/damas/ProximoMovimentosDasDamas';
 
 import './styles.css';
 
@@ -249,6 +249,24 @@ function Dama({ posicao }) {
     const [novaColuna, novaLinha] = converterPosicoesParaPorcentagem();
     setposicaoColuna(novaColuna);
     setposicaoLinha(novaLinha);
+
+    const corDama = posicao[0];
+    const linhaDama = posicao[2];
+
+    switch (corDama) {
+      case 'B':
+        if (linhaDama === '8') {
+          console.log('superDama');
+        }
+        break;
+      case 'P':
+        if (linhaDama === '1') {
+          console.log('superDama');
+        }
+        break;
+      default:
+        break;
+    }
   }, [posicao]);
 
   return (

@@ -4,7 +4,7 @@
   width: 500px;
   height: 500px;
 
-  background: url('../../../../assets/tabuleiro.png') no-repeat;
+  background: url('../../../assets/tabuleiro.png') no-repeat;
   background-size: cover;
 }
 
