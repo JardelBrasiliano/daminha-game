@@ -7,6 +7,6 @@
 
   width: 12.5%;
   height: 12.5%;
-
+  z-index: 100;
   background-color: #faea3faf;
 }

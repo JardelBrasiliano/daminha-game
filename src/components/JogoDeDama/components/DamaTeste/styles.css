@@ -1,0 +1,17 @@
+.dama-container {
+  position: absolute;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 12.5%;
+  height: 12.5%;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.superDama::before {
+  content: url('../../../../assets/coroa.svg');
+  transform: scale(0.05);
+}

@@ -4,12 +4,7 @@ import PropTypes from 'prop-types';
 const ProximosMovimentosContext = createContext();
 
 export default function ProximosMovimentosProvider({ children }) {
-  const [proximosMovimentos, setProximosMovimentos] = useState([
-    [-1, -1],
-    [-1, -1],
-    [-1, -1],
-    [-1, -1],
-  ]);
+  const [proximosMovimentos, setProximosMovimentos] = useState([]);
 
   return (
     <ProximosMovimentosContext.Provider
@@ -28,6 +23,13 @@ export function useProximosMovimentos() {
   if (!context) throw new Error('useCount must be used within a CountProvider');
   const { proximosMovimentos, setProximosMovimentos } = context;
   return { proximosMovimentos, setProximosMovimentos };
+}
+
+export function useLimparProximosMovimentos() {
+  const context = useContext(ProximosMovimentosContext);
+  if (!context) throw new Error('useCount must be used within a CountProvider');
+  const { setProximosMovimentos } = context;
+  setProximosMovimentos([]);
 }
 
 ProximosMovimentosProvider.propTypes = {

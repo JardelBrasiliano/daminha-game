@@ -6,15 +6,19 @@ import MovDamasPretasProvider from './MovDamasPretas';
 import ProximosMovimentosProvider from './ProximoMovimentos';
 import DamaClicadoProvider from './DamaClicado';
 
+import MovimentosDasDamasProvider from './MovimentosDasDamas';
+
 function ContextProvider({ children }) {
   return (
-    <DamaClicadoProvider>
-      <ProximosMovimentosProvider>
-        <MovDamasPretasProvider>
-          <MovDamasBrancasProvider>{children}</MovDamasBrancasProvider>
-        </MovDamasPretasProvider>
-      </ProximosMovimentosProvider>
-    </DamaClicadoProvider>
+    <MovimentosDasDamasProvider>
+      <DamaClicadoProvider>
+        <ProximosMovimentosProvider>
+          <MovDamasPretasProvider>
+            <MovDamasBrancasProvider>{children}</MovDamasBrancasProvider>
+          </MovDamasPretasProvider>
+        </ProximosMovimentosProvider>
+      </DamaClicadoProvider>
+    </MovimentosDasDamasProvider>
   );
 }
 
