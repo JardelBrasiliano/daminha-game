@@ -6,7 +6,7 @@ import { useProximosMovimentos } from '../../../../../context/damas/ProximoMovim
 
 import './styles.css';
 
-function ProximosMovimentosSuperDama({ de, para, comer }) {
+function ProximosMovimentos({ de, para, comer }) {
   const [posicaoLinha, setposicaoLinha] = useState('');
   const [posicaoColuna, setposicaoColuna] = useState('');
 
@@ -93,10 +93,10 @@ function ProximosMovimentosSuperDama({ de, para, comer }) {
   );
 }
 
-ProximosMovimentosSuperDama.propTypes = {
+ProximosMovimentos.propTypes = {
   de: PropTypes.string.isRequired,
   para: PropTypes.string.isRequired,
   comer: PropTypes.string.isRequired,
 };
 
-export default ProximosMovimentosSuperDama;
+export default ProximosMovimentos;

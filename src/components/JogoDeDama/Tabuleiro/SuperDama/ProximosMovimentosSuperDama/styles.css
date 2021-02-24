@@ -1,0 +1,14 @@
+.proximosMovimentosSuperDama-container {
+  position: absolute;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 12.5%;
+  height: 12.5%;
+  z-index: 100;
+  background-color: #faea3faf;
+
+  transition: all 0.3s ease-in;
+}

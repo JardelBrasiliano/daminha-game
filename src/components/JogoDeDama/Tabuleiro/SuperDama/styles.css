@@ -1,4 +1,4 @@
-.dama-container {
+.super-dama-container {
   position: absolute;
   cursor: pointer;
 
@@ -8,9 +8,13 @@
 
   width: 12.5%;
   height: 12.5%;
-  background: transparent;
   background-size: cover;
   background-repeat: no-repeat;
 
   transition: all 0.4s ease-in-out;
+}
+
+.super-dama-container::before {
+  content: url('../../../../assets/coroa.svg');
+  transform: scale(0.05);
 }

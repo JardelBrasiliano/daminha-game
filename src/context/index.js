@@ -3,14 +3,8 @@ import PropTypes from 'prop-types';
 
 import DamasProvider from './damas';
 
-import SuperDamasProvider from './superDama';
-
 function ContextProvider({ children }) {
-  return (
-    <DamasProvider>
-      <SuperDamasProvider>{children}</SuperDamasProvider>
-    </DamasProvider>
-  );
+  return <DamasProvider>{children}</DamasProvider>;
 }
 
 ContextProvider.propTypes = {

@@ -4,6 +4,9 @@ import PropTypes from 'prop-types';
 import { useMovimentosDasDamas } from '../../../../context/damas/MovimentosDasDamas';
 import { useProximosMovimentos } from '../../../../context/damas/ProximoMovimentosDasDamas';
 
+import damaBranca from '../../../../assets/damaBranca.png';
+import damaPreta from '../../../../assets/damaPreta.png';
+
 import './styles.css';
 
 function Dama({ posicao }) {
@@ -49,9 +52,11 @@ function Dama({ posicao }) {
     switch (dama[0]) {
       case 'B': {
         const temDamaBranca =
-          MovimentosDasDamas[MovimentosDasDamas.indexOf(`B${colunaELinha}`)];
+          MovimentosDasDamas[MovimentosDasDamas.indexOf(`B${colunaELinha}`)] ||
+          MovimentosDasDamas[MovimentosDasDamas.indexOf(`B${colunaELinha}S`)];
         const temDamaPreta =
-          MovimentosDasDamas[MovimentosDasDamas.indexOf(`P${colunaELinha}`)];
+          MovimentosDasDamas[MovimentosDasDamas.indexOf(`P${colunaELinha}`)] ||
+          MovimentosDasDamas[MovimentosDasDamas.indexOf(`P${colunaELinha}S`)];
 
         if (temDamaBranca) {
           return -1;
@@ -63,9 +68,11 @@ function Dama({ posicao }) {
       }
       case 'P': {
         const temDamaBranca =
-          MovimentosDasDamas[MovimentosDasDamas.indexOf(`B${colunaELinha}`)];
+          MovimentosDasDamas[MovimentosDasDamas.indexOf(`B${colunaELinha}`)] ||
+          MovimentosDasDamas[MovimentosDasDamas.indexOf(`B${colunaELinha}S`)];
         const temDamaPreta =
-          MovimentosDasDamas[MovimentosDasDamas.indexOf(`P${colunaELinha}`)];
+          MovimentosDasDamas[MovimentosDasDamas.indexOf(`P${colunaELinha}`)] ||
+          MovimentosDasDamas[MovimentosDasDamas.indexOf(`P${colunaELinha}S`)];
 
         if (temDamaBranca) {
           return temDamaBranca;
@@ -249,24 +256,6 @@ function Dama({ posicao }) {
     const [novaColuna, novaLinha] = converterPosicoesParaPorcentagem();
     setposicaoColuna(novaColuna);
     setposicaoLinha(novaLinha);
-
-    const corDama = posicao[0];
-    const linhaDama = posicao[2];
-
-    switch (corDama) {
-      case 'B':
-        if (linhaDama === '8') {
-          console.log('superDama');
-        }
-        break;
-      case 'P':
-        if (linhaDama === '1') {
-          console.log('superDama');
-        }
-        break;
-      default:
-        break;
-    }
   }, [posicao]);
 
   return (
@@ -275,7 +264,9 @@ function Dama({ posicao }) {
       id={posicao}
       className="dama-container"
       style={{
-        backgroundColor: `${posicao[0] === 'B' ? 'blue' : 'red'}`,
+        backgroundImage: `${
+          posicao[0] === 'B' ? `url(${damaBranca})` : `url(${damaPreta})`
+        }`,
         left: `${posicaoColuna}`,
         bottom: `${posicaoLinha}`,
       }}

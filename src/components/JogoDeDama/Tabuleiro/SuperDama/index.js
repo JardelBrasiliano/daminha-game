@@ -1,0 +1,335 @@
+import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
+
+import { useMovimentosDasDamas } from '../../../../context/damas/MovimentosDasDamas';
+import { useProximosMovimentos } from '../../../../context/damas/ProximoMovimentosDasDamas';
+
+import damaBranca from '../../../../assets/damaBranca.png';
+import damaPreta from '../../../../assets/damaPreta.png';
+
+import './styles.css';
+
+function Dama({ posicao }) {
+  const [posicaoLinha, setposicaoLinha] = useState('');
+  const [posicaoColuna, setposicaoColuna] = useState('');
+
+  const { MovimentosDasDamas } = useMovimentosDasDamas();
+  const { setProximosMovimentos } = useProximosMovimentos();
+
+  const converterPosicoesParaPorcentagem = () => {
+    const posicaoLeft = {
+      a: '0',
+      b: '12.5%',
+      c: '25%',
+      d: '37.5%',
+      e: '50%',
+      f: '62.5%',
+      g: '75%',
+      h: '87.5%',
+    };
+    const posicaoBottom = [
+      '0%',
+      '12.5%',
+      '25%',
+      '37.5%',
+      '50%',
+      '62.5%',
+      '75%',
+      '87.5%',
+    ];
+    return [
+      posicaoLeft[posicao[1].toLowerCase()],
+      posicaoBottom[+posicao[2] - 1],
+    ];
+  };
+
+  const validacaoDeDamaNoTabuleiro = (dama) => {
+    const colunaELinha = dama[1] + dama[2];
+
+    if (dama.length === 2 || dama[2] >= 9 || dama[2] <= 0) {
+      return -1;
+    }
+    switch (dama[0]) {
+      case 'B': {
+        const temDamaBranca =
+          MovimentosDasDamas[MovimentosDasDamas.indexOf(`B${colunaELinha}`)] ||
+          MovimentosDasDamas[MovimentosDasDamas.indexOf(`B${colunaELinha}S`)];
+        const temDamaPreta =
+          MovimentosDasDamas[MovimentosDasDamas.indexOf(`P${colunaELinha}`)] ||
+          MovimentosDasDamas[MovimentosDasDamas.indexOf(`P${colunaELinha}S`)];
+
+        if (temDamaBranca) {
+          return -1;
+        }
+        if (temDamaPreta) {
+          return temDamaPreta;
+        }
+        return 'livre';
+      }
+      case 'P': {
+        const temDamaBranca =
+          MovimentosDasDamas[MovimentosDasDamas.indexOf(`B${colunaELinha}`)] ||
+          MovimentosDasDamas[MovimentosDasDamas.indexOf(`B${colunaELinha}S`)];
+        const temDamaPreta =
+          MovimentosDasDamas[MovimentosDasDamas.indexOf(`P${colunaELinha}`)] ||
+          MovimentosDasDamas[MovimentosDasDamas.indexOf(`P${colunaELinha}S`)];
+
+        if (temDamaBranca) {
+          return temDamaBranca;
+        }
+        if (temDamaPreta) {
+          return -1;
+        }
+        return 'livre';
+      }
+      default:
+        return 0;
+    }
+  };
+
+  const calcularJogaParaFrente = (dama) => {
+    const ordem = ['', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', ''];
+
+    const possiveisJogadas = [];
+
+    let indexOrdemDireita = ordem.indexOf(dama[1]);
+    let indexOrdemEsquerda = ordem.indexOf(dama[1]);
+    let proximaLinhaSoma = 0;
+
+    let controleGeral = true;
+    let controleDireitro = false;
+    let controleEsquerda = false;
+    let te = 0;
+    while (controleGeral) {
+      te = +1;
+      if (te >= 3) {
+        controleGeral = false;
+      }
+      const proximaLinha = +dama[2] + (proximaLinhaSoma += 1);
+      const proximaDireita = !controleDireitro
+        ? dama[0] + ordem[(indexOrdemDireita += 1)] + proximaLinha
+        : '000';
+      const proximaEsquerda = !controleEsquerda
+        ? dama[0] + ordem[(indexOrdemEsquerda -= 1)] + proximaLinha
+        : '000';
+
+      const resValidacaoDireita = validacaoDeDamaNoTabuleiro(proximaDireita);
+      const resValidacaoEsquerda = validacaoDeDamaNoTabuleiro(proximaEsquerda);
+
+      if (resValidacaoDireita === 'livre') {
+        possiveisJogadas.push({
+          de: dama,
+          para: `${proximaDireita}S`,
+          comer: false,
+        });
+      } else if (resValidacaoDireita !== -1) {
+        const comerProximalinha = +proximaDireita[2] + 1;
+        const comerProxima =
+          dama[0] +
+          ordem[ordem.indexOf(proximaDireita[1]) + 1] +
+          comerProximalinha;
+
+        const validarComer = validacaoDeDamaNoTabuleiro(comerProxima);
+        const corMinhaDama = dama[0];
+        const comerEssaDama =
+          corMinhaDama === 'B'
+            ? proximaDireita.replace(/B/g, 'P')
+            : proximaDireita.replace(/P/g, 'B');
+
+        if (validarComer === 'livre') {
+          possiveisJogadas.push({
+            de: dama,
+            para: `${comerProxima}S`,
+            comer: comerEssaDama,
+          });
+          controleDireitro = true;
+        } else {
+          controleDireitro = true;
+        }
+      } else {
+        controleDireitro = true;
+      }
+      if (resValidacaoEsquerda === 'livre') {
+        possiveisJogadas.push({
+          de: dama,
+          para: `${proximaEsquerda}S`,
+          comer: false,
+        });
+      } else if (resValidacaoEsquerda !== -1) {
+        const indexComerProximalinha = +proximaEsquerda[2] + 1;
+        const comerProxima =
+          dama[0] +
+          ordem[ordem.indexOf(proximaEsquerda[1]) - 1] +
+          indexComerProximalinha;
+        const validarComer = validacaoDeDamaNoTabuleiro(comerProxima);
+
+        const corMinhaDama = dama[0];
+        const comerEssaDama =
+          corMinhaDama === 'B'
+            ? proximaEsquerda.replace(/B/g, 'P')
+            : proximaEsquerda.replace(/P/g, 'B');
+
+        if (validarComer === 'livre') {
+          possiveisJogadas.push({
+            de: dama,
+            para: `${comerProxima}S`,
+            comer: comerEssaDama,
+          });
+          controleEsquerda = true;
+        } else {
+          controleEsquerda = true;
+        }
+      } else {
+        controleEsquerda = true;
+      }
+      // SAIR DO LOOP
+      if (controleDireitro && controleEsquerda) {
+        controleGeral = false;
+      }
+    }
+    return possiveisJogadas;
+  };
+
+  const calcularJogaParaTras = (dama) => {
+    const ordem = ['', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', ''];
+
+    const possiveisJogadas = [];
+
+    let indexOrdemDireita = ordem.indexOf(dama[1]);
+    let indexOrdemEsquerda = ordem.indexOf(dama[1]);
+    let proximaLinhaSoma = 0;
+
+    let controleGeral = true;
+    let controleDireitro = false;
+    let controleEsquerda = false;
+    let te = 0;
+    while (controleGeral) {
+      te = +1;
+      if (te >= 3) {
+        controleGeral = false;
+      }
+
+      const proximaLinha = +dama[2] + (proximaLinhaSoma -= 1);
+      const proximaDireita = !controleDireitro
+        ? dama[0] + ordem[(indexOrdemDireita += 1)] + proximaLinha
+        : '000';
+      const proximaEsquerda = !controleEsquerda
+        ? dama[0] + ordem[(indexOrdemEsquerda -= 1)] + proximaLinha
+        : '000';
+
+      const resValidacaoDireita = validacaoDeDamaNoTabuleiro(proximaDireita);
+      const resValidacaoEsquerda = validacaoDeDamaNoTabuleiro(proximaEsquerda);
+
+      if (resValidacaoDireita === 'livre') {
+        possiveisJogadas.push({
+          de: dama,
+          para: `${proximaDireita}S`,
+          comer: false,
+        });
+      } else if (resValidacaoDireita !== -1) {
+        const comerProximalinha = +proximaDireita[2] - 1;
+        const comerProxima =
+          dama[0] +
+          ordem[ordem.indexOf(proximaDireita[1]) + 1] +
+          comerProximalinha;
+
+        const validarComer = validacaoDeDamaNoTabuleiro(comerProxima);
+        const corMinhaDama = dama[0];
+        const comerEssaDama =
+          corMinhaDama === 'B'
+            ? proximaDireita.replace(/B/g, 'P')
+            : proximaDireita.replace(/P/g, 'B');
+
+        if (validarComer === 'livre') {
+          possiveisJogadas.push({
+            de: dama,
+            para: `${comerProxima}S`,
+            comer: comerEssaDama,
+          });
+          controleDireitro = true;
+        } else {
+          controleDireitro = true;
+        }
+      } else {
+        controleDireitro = true;
+      }
+
+      if (resValidacaoEsquerda === 'livre') {
+        possiveisJogadas.push({
+          de: dama,
+          para: `${proximaEsquerda}S`,
+          comer: false,
+        });
+      } else if (resValidacaoEsquerda !== -1) {
+        const indexComerProximalinha = +proximaEsquerda[2] + 1;
+        const comerProxima =
+          dama[0] +
+          ordem[ordem.indexOf(proximaEsquerda[1]) - 1] +
+          indexComerProximalinha;
+        const validarComer = validacaoDeDamaNoTabuleiro(comerProxima);
+
+        const corMinhaDama = dama[0];
+
+        const comerEssaDama =
+          corMinhaDama === 'B'
+            ? proximaEsquerda.replace(/B/g, 'P')
+            : proximaEsquerda.replace(/P/g, 'B');
+
+        if (validarComer === 'livre') {
+          possiveisJogadas.push({
+            de: dama,
+            para: `${comerProxima}S`,
+            comer: comerEssaDama,
+          });
+          controleEsquerda = true;
+        } else {
+          controleEsquerda = true;
+        }
+      } else {
+        controleEsquerda = true;
+      }
+      // SAIR DO LOOP
+      if (controleDireitro && controleEsquerda) {
+        controleGeral = false;
+      }
+    }
+    return possiveisJogadas;
+  };
+
+  const calcularJogada = (dama) => {
+    setProximosMovimentos([]);
+
+    const movimentosParaFrente = calcularJogaParaFrente(dama);
+    const movimentosParaTras = calcularJogaParaTras(dama);
+
+    const movFinais = movimentosParaTras.concat(movimentosParaFrente);
+    setProximosMovimentos(movFinais);
+  };
+
+  useEffect(() => {
+    const [novaColuna, novaLinha] = converterPosicoesParaPorcentagem();
+    setposicaoColuna(novaColuna);
+    setposicaoLinha(novaLinha);
+  }, [posicao]);
+
+  return (
+    <bottom
+      onClick={(dama) => calcularJogada(dama.target.id)}
+      id={posicao}
+      className="super-dama-container"
+      style={{
+        backgroundImage: `${
+          posicao[0] === 'B' ? `url(${damaBranca})` : `url(${damaPreta})`
+        }`,
+        left: `${posicaoColuna}`,
+        bottom: `${posicaoLinha}`,
+      }}
+    />
+  );
+}
+
+Dama.propTypes = {
+  posicao: PropTypes.string.isRequired,
+};
+
+export default Dama;
